@@ -75,13 +75,13 @@ export default function Hero() {
               <div className="absolute inset-0 rounded-full bg-primary blur-3xl opacity-30"></div>
 
               <Image
-                src="/images/profile/profile.png"
-                alt="Profile"
-                width={420}
-                height={420}
-                priority
-                className="relative rounded-full border-4 border-primary object-cover"
-              />
+  src="/pic.png"
+  alt="Fahim Ahmmed Shihab"
+  width={420}
+  height={420}
+  priority
+  className="rounded-full object-cover border-4 border-primary"
+/>
 
             </div>
           </motion.div>

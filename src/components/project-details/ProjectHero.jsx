@@ -5,15 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
+ import { FaGithub } from "react-icons/fa";
 
 import {
-
-ArrowLeft,
-
-Github,
-
-ExternalLink
-
+  ArrowLeft,
+  GithubIcon,
+  ExternalLink,
 } from "lucide-react";
 
 import Container from "../shared/Container";
@@ -124,7 +121,7 @@ className="btn btn-outline"
 
 >
 
-<Github/>
+<FaGithub />
 
 Github
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import Container from "./Container";
 import navLinks from "@/data/navLinks";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   return (
@@ -22,6 +23,7 @@ export default function Navbar() {
             </Link>
 
           </div>
+          <ThemeToggle />
 
           {/* Desktop Menu */}
 

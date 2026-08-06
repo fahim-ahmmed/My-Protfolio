@@ -1,57 +1,37 @@
-export default function NotFound() {
-  return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        textAlign: "center",
-        padding: "20px",
-      }}
-    >
-      <h1
-        style={{
-          fontSize: "72px",
-          margin: 0,
-          fontWeight: "bold",
-        }}
-      >
-        404
-      </h1>
+import Link from "next/link";
 
-      <h2
-        style={{
-          marginTop: "10px",
-          fontSize: "28px",
-        }}
-      >
-        Page Not Found
-      </h2>
+export default function NotFound(){
 
-      <p
-        style={{
-          color: "#666",
-          marginTop: "10px",
-        }}
-      >
-        The page you are looking for does not exist.
-      </p>
+return(
 
-      <a
-        href="/"
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          background: "#000",
-          color: "#fff",
-          textDecoration: "none",
-          borderRadius: "8px",
-        }}
-      >
-        Go Home
-      </a>
-    </main>
-  );
+<div className="min-h-screen flex flex-col items-center justify-center">
+
+<h1 className="text-8xl font-bold">
+
+404
+
+</h1>
+
+<p className="text-slate-400 mt-6">
+
+Page Not Found
+
+</p>
+
+<Link
+
+href="/"
+
+className="btn btn-primary mt-10"
+
+>
+
+Go Home
+
+</Link>
+
+</div>
+
+)
+
 }

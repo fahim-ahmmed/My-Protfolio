@@ -7,9 +7,15 @@ import Experience from "@/components/home/Experience";
 import Projects from "@/components/home/Projects";
 import Contact from "@/components/home/Contact";
 
+import Footer from "@/components/shared/Footer";
+import ScrollTop from "@/components/shared/ScrollTop";
+import ScrollProgress from "@/components/shared/ScrollProgress";
+
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
+
       <Navbar />
 
       <main>
@@ -21,7 +27,10 @@ export default function Home() {
         <Projects />
         <Contact />
       </main>
-      
+
+      <Footer />
+
+      <ScrollTop />
     </>
   );
 }

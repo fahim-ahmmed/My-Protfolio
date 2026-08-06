@@ -42,9 +42,15 @@ export default function FeaturedProject({ project }) {
             Featured Project
           </span>
 
-          <h2 className="text-4xl font-bold mt-4">
-            {project.title}
-          </h2>
+         <div className="mt-4">
+  <h2 className="text-4xl lg:text-5xl font-bold">
+    {project.title}
+  </h2>
+
+  <p className="text-primary text-lg mt-2">
+    {project.subtitle}
+  </p>
+</div>
 
           <p className="text-slate-400 mt-6 leading-8">
             {project.shortDescription}
@@ -99,3 +105,5 @@ export default function FeaturedProject({ project }) {
     </motion.article>
   );
 }
+
+

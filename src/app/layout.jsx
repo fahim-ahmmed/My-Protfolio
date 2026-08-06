@@ -1,33 +1,59 @@
-import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  weight: ["400", "500", "600", "700"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+import Providers from "@/components/providers/ThemeProvider";
 
 export const metadata = {
-  title: "Fahim Ahmed | Frontend Developer",
+  title: {
+    default: "Fahim Ahmed | Frontend Developer",
+    template: "%s | Fahim Ahmed",
+  },
+
   description:
-    "Frontend Developer specializing in React.js, Next.js and Tailwind CSS.",
-  icons: {
-    icon: "/favicon.ico",
+    "Frontend Developer specializing in Next.js, React.js and Tailwind CSS.",
+
+  keywords: [
+    "Frontend Developer",
+    "React",
+    "Next.js",
+    "Portfolio",
+    "JavaScript",
+    "Tailwind CSS",
+  ],
+
+  authors: [
+    {
+      name: "Fahim Ahmed",
+    },
+  ],
+
+  creator: "Fahim Ahmed",
+
+  openGraph: {
+    title: "Fahim Ahmed",
+
+    description:
+      "Modern Frontend Developer Portfolio",
+
+    type: "website",
   },
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}) {
   return (
-    <html lang="en" data-theme="dark" className="scroll-smooth">
-      <body
-        className={`${poppins.variable} ${inter.variable} font-sans bg-slate-950 text-white`}
-      >
-        {children}
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
+      <body>
+
+        <Providers>
+
+          {children}
+
+        </Providers>
+
       </body>
     </html>
   );
