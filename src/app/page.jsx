@@ -3,10 +3,26 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Github, Linkedin, Mail, ExternalLink, Download, Code2, 
-  CheckCircle2, ArrowRight, Menu, X, Sparkles, Briefcase, UserCheck
+  Mail, ExternalLink, Download, GraduationCap, Calendar, 
+  CheckCircle2, ArrowRight, Menu, X, Sparkles, UserCheck
 } from 'lucide-react';
-import { personalInfo, techStack, skills, services, projects, whyHireMe } from '@/data/portfolioData';
+import { personalInfo, techStack, skillsWithIcons, services, projects, whyHireMe } from '@/data/portfolioData';
+
+// Custom SVG Icons
+const GithubIcon = ({ size = 18, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
+const LinkedinIcon = ({ size = 18, className = "" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 // Animation Variants
 const fadeInUp = {
@@ -52,7 +68,7 @@ export default function Home() {
           </div>
 
           <a href="#contact" className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-sm font-semibold transition-all">
-            Let's Talk <ArrowRight size={16} />
+            Let's GO <ArrowRight size={16} />
           </a>
 
           <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden text-gray-300">
@@ -69,7 +85,7 @@ export default function Home() {
               </a>
             ))}
             <a href="#contact" onClick={() => setMobileMenu(false)} className="mt-2 text-center py-2.5 rounded-full bg-blue-600 text-white font-medium">
-              Let's Talk
+              Let's Go
             </a>
           </div>
         )}
@@ -100,7 +116,11 @@ export default function Home() {
             <a href="#projects" className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all flex items-center gap-2">
               View My Projects <ArrowRight size={18} />
             </a>
-            <a href="/resume.pdf" download className="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 font-semibold transition-all flex items-center gap-2">
+            <a 
+              href="/resume.pdf" 
+              download="Md_Fahim_Ahammed_Shihab_Resume.pdf" 
+              className="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 font-semibold transition-all flex items-center gap-2"
+            >
               Download Resume <Download size={18} />
             </a>
           </motion.div>
@@ -111,13 +131,20 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Right Photo Placeholder & Tech Badges */}
+        {/* Right Photo Card */}
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative z-10">
-          <div className="w-72 h-72 sm:w-96 sm:h-96 rounded-2xl bg-gradient-to-tr from-blue-600/30 to-purple-600/30 border border-white/10 p-2 relative flex items-center justify-center">
-            <div className="w-full h-full bg-[#0d1322] rounded-xl flex flex-col items-center justify-center text-center p-6">
-              <Code2 size={64} className="text-blue-400 mb-2" />
-              <span className="text-xl font-bold text-white">{personalInfo.name}</span>
-              <span className="text-sm text-gray-400">{personalInfo.title}</span>
+          <div className="w-72 h-80 sm:w-96 sm:h-[420px] rounded-2xl bg-gradient-to-tr from-blue-600/30 to-purple-600/30 border border-white/10 p-2 relative shadow-2xl">
+            <div className="w-full h-full bg-[#0d1322] rounded-xl overflow-hidden relative">
+              <img 
+                src={personalInfo.avatar || "/fahimpic.png"} 
+                alt={personalInfo.name} 
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent opacity-70" />
+              <div className="absolute bottom-4 left-4 right-4 text-center">
+                <span className="text-lg font-bold text-white block">{personalInfo.name}</span>
+                <span className="text-xs text-blue-400 font-medium">{personalInfo.title}</span>
+              </div>
             </div>
 
             {/* Floating Tech Badges */}
@@ -140,23 +167,47 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 04 — ABOUT ME */}
+      {/* 04 — ABOUT ME & EDUCATION */}
       <section id="about" className="py-24 max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
             <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Who is Fahim?</h2>
             <h3 className="text-3xl font-bold mb-6">Passionate Full-Stack Developer with a Drive for Quality</h3>
-            <p className="text-gray-400 leading-relaxed mb-6">
+            <p className="text-gray-400 leading-relaxed mb-8">
               I specialize in building full-stack web applications using the MERN & Next.js ecosystem. My goal is to craft highly performant backends combined with smooth, responsive frontend interfaces.
             </p>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
-              <h4 className="text-white font-semibold text-sm">Education</h4>
-              {personalInfo.education.map((edu, idx) => (
-                <div key={idx} className="text-xs text-gray-400">
-                  <p className="text-gray-200 font-medium">{edu.degree}</p>
-                  <p>{edu.institution}</p>
-                </div>
-              ))}
+
+            {/* Education Timeline */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-white font-bold text-lg mb-4">
+                <GraduationCap className="text-blue-400" size={24} />
+                <h4>Educational Background</h4>
+              </div>
+
+              <div className="relative border-l-2 border-blue-500/30 pl-6 space-y-8 ml-3">
+                {personalInfo.education.map((edu, idx) => (
+                  <div key={idx} className="relative group">
+                    <span className="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-blue-500 border-4 border-[#070B14] group-hover:scale-125 transition-transform" />
+                    <div className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/40 transition-all space-y-2">
+                      <div className="flex flex-wrap justify-between items-center gap-2">
+                        <span className="text-xs px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 font-semibold flex items-center gap-1.5">
+                          <Calendar size={12} /> {edu.session}
+                        </span>
+                        <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold ${
+                          edu.status === "Running" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                        }`}>
+                          {edu.status}
+                        </span>
+                      </div>
+                      <h5 className="text-lg font-bold text-white">{edu.degree}</h5>
+                      <p className="text-xs text-blue-400 font-medium">{edu.institution}</p>
+                      {edu.description && (
+                        <p className="text-xs text-gray-400 leading-relaxed pt-1">{edu.description}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -175,7 +226,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 05 — TECHNICAL SKILLS */}
+      {/* 05 — TECHNICAL SKILLS WITH BRAND LOGO ICONS */}
       <section id="skills" className="py-20 bg-white/[0.01]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -184,14 +235,15 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {Object.entries(skills).map(([category, items]) => (
+            {Object.entries(skillsWithIcons).map(([category, items]) => (
               <div key={category} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/40 transition-all">
-                <h4 className="text-lg font-bold capitalize mb-4 text-blue-400">{category}</h4>
-                <div className="flex flex-wrap gap-2">
-                  {items.map((item) => (
-                    <span key={item} className="px-3 py-1.5 rounded-lg bg-white/5 text-xs font-medium text-gray-300 border border-white/5 hover:text-white hover:border-blue-500/30 transition-all">
-                      {item}
-                    </span>
+                <h4 className="text-lg font-bold capitalize mb-5 text-blue-400">{category}</h4>
+                <div className="flex flex-wrap gap-2.5">
+                  {items.map((tech) => (
+                    <div key={tech.name} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-medium text-gray-200 hover:text-white hover:border-blue-500/40 hover:bg-white/10 transition-all">
+                      <img src={tech.icon} alt={tech.name} className="w-4 h-4 object-contain shrink-0" />
+                      <span>{tech.name}</span>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -200,19 +252,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — SERVICES */}
+      {/* 06 — SERVICES WITH TOPIC-EXACT HIGH QUALITY IMAGES */}
       <section id="services" className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Services</h2>
           <h3 className="text-3xl font-bold">What I Can Build For You</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((srv) => (
-            <div key={srv.id} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/40 hover:-translate-y-1 transition-all group">
-              <span className="text-3xl font-extrabold text-blue-500/40 group-hover:text-blue-400 transition-colors mb-4 block">{srv.id}</span>
-              <h4 className="text-xl font-bold mb-3">{srv.title}</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">{srv.description}</p>
+            <div key={srv.id} className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all group flex flex-col">
+              <div className="h-44 w-full relative overflow-hidden bg-[#0d1322]">
+                <img 
+                  src={srv.image} 
+                  alt={srv.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent" />
+                <span className="absolute top-4 left-4 text-2xl font-black text-white px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10">
+                  {srv.id}
+                </span>
+              </div>
+
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">{srv.title}</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">{srv.description}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -229,11 +296,13 @@ export default function Home() {
           <div className="space-y-12">
             {projects.map((proj) => (
               <div key={proj.id} className="p-8 rounded-2xl bg-white/5 border border-white/10 flex flex-col lg:flex-row gap-8 items-center">
-                <div className="w-full lg:w-1/2 h-64 rounded-xl bg-gradient-to-tr from-blue-900/20 to-purple-900/20 border border-white/10 flex items-center justify-center p-6 text-center">
-                  <div>
-                    <Code2 size={48} className="text-blue-400 mx-auto mb-2" />
-                    <span className="text-lg font-bold">{proj.title} Preview</span>
-                  </div>
+                <div className="w-full lg:w-1/2 h-64 sm:h-72 rounded-xl overflow-hidden border border-white/10 relative group bg-[#0f172a]">
+                  <img 
+                    src={proj.image} 
+                    alt={proj.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent opacity-60" />
                 </div>
 
                 <div className="w-full lg:w-1/2 space-y-4">
@@ -249,7 +318,7 @@ export default function Home() {
 
                   <div className="flex items-center gap-4 pt-4">
                     <a href={proj.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-gray-300 hover:text-white">
-                      <Github size={16} /> GitHub
+                      <GithubIcon size={16} /> GitHub
                     </a>
                     <a href={proj.liveDemo} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-blue-400 hover:underline">
                       <ExternalLink size={16} /> Live Demo
@@ -348,7 +417,11 @@ export default function Home() {
             <a href="#contact" className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all">
               Hire Me
             </a>
-            <a href="/resume.pdf" download className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold transition-all flex items-center gap-2">
+            <a 
+              href="/resume.pdf" 
+              download="Md_Fahim_Ahammed_Shihab_Resume.pdf" 
+              className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold transition-all flex items-center gap-2"
+            >
               Download Resume <Download size={16} />
             </a>
           </div>
@@ -365,15 +438,49 @@ export default function Home() {
               Feel free to reach out for job openings, freelance projects, or technical collaborations.
             </p>
             <div className="space-y-4 text-sm text-gray-300">
-              <div className="flex items-center gap-3">
-                <Mail className="text-blue-400" size={18} /> {personalInfo.contact.email}
-              </div>
-              <div className="flex items-center gap-3">
-                <Linkedin className="text-blue-400" size={18} /> LinkedIn Profile
-              </div>
-              <div className="flex items-center gap-3">
-                <Github className="text-blue-400" size={18} /> GitHub Repository
-              </div>
+              
+              {/* Clickable Email */}
+              <a href="mailto:ahmmedshihab205@gmail.com" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
+                <Mail className="text-blue-400 shrink-0" size={18} /> 
+                <span>ahmmedshihab205@gmail.com</span>
+              </a>
+
+              {/* Clickable Phone Number */}
+              <a href="tel:+8801305470835" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
+                <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 shrink-0">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span>+880 1305470835</span>
+              </a>
+
+              {/* Clickable WhatsApp */}
+              <a href="https://wa.me/8801572930788" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-emerald-400 transition-colors">
+                <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-400 shrink-0">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+                <span>WhatsApp Chat</span>
+              </a>
+
+              {/* Clickable Facebook */}
+              <a href="https://www.facebook.com/ahmmedfahim205" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
+                <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 shrink-0">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+                <span>Facebook Profile</span>
+              </a>
+
+              {/* Clickable LinkedIn */}
+              <a href="https://linkedin.com/in/fahim-ahmmed" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
+                <LinkedinIcon className="text-blue-400 shrink-0" size={18} /> 
+                <span>LinkedIn Profile</span>
+              </a>
+
+              {/* Clickable GitHub */}
+              <a href="https://github.com/fahim-ahmmed" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
+                <GithubIcon className="text-blue-400 shrink-0" size={18} /> 
+                <span>GitHub Repository</span>
+              </a>
+
             </div>
           </div>
 
