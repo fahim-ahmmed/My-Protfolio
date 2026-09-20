@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -68,7 +69,7 @@ export default function Home() {
           </div>
 
           <a href="#contact" className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-sm font-semibold transition-all">
-            Let's GO <ArrowRight size={16} />
+            Let&apos;s GO <ArrowRight size={16} />
           </a>
 
           <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden text-gray-300">
@@ -85,7 +86,7 @@ export default function Home() {
               </a>
             ))}
             <a href="#contact" onClick={() => setMobileMenu(false)} className="mt-2 text-center py-2.5 rounded-full bg-blue-600 text-white font-medium">
-              Let's Go
+              Let&apos;s Go
             </a>
           </div>
         )}
@@ -98,7 +99,7 @@ export default function Home() {
 
         <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="flex-1 space-y-6 z-10">
           <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm">
-            <Sparkles size={16} /> Hello, I'm Fahim 👋
+            <Sparkles size={16} /> Hello, I&apos;m Fahim 👋
           </motion.div>
 
           <motion.h1 variants={fadeInUp} className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
@@ -135,9 +136,11 @@ export default function Home() {
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative z-10">
           <div className="w-72 h-80 sm:w-96 sm:h-[420px] rounded-2xl bg-gradient-to-tr from-blue-600/30 to-purple-600/30 border border-white/10 p-2 relative shadow-2xl">
             <div className="w-full h-full bg-[#0d1322] rounded-xl overflow-hidden relative">
-              <img 
+              <Image 
                 src={personalInfo.avatar || "/fahimpic.png"} 
                 alt={personalInfo.name} 
+                width={800}
+                height={900}
                 className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent opacity-70" />
@@ -241,7 +244,7 @@ export default function Home() {
                 <div className="flex flex-wrap gap-2.5">
                   {items.map((tech) => (
                     <div key={tech.name} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-medium text-gray-200 hover:text-white hover:border-blue-500/40 hover:bg-white/10 transition-all">
-                      <img src={tech.icon} alt={tech.name} className="w-4 h-4 object-contain shrink-0" />
+                      <Image src={tech.icon} alt={tech.name} width={16} height={16} className="w-4 h-4 object-contain shrink-0" />
                       <span>{tech.name}</span>
                     </div>
                   ))}
@@ -263,9 +266,11 @@ export default function Home() {
           {services.map((srv) => (
             <div key={srv.id} className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all group flex flex-col">
               <div className="h-44 w-full relative overflow-hidden bg-[#0d1322]">
-                <img 
+                <Image 
                   src={srv.image} 
                   alt={srv.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent" />
@@ -297,10 +302,12 @@ export default function Home() {
             {projects.map((proj) => (
               <div key={proj.id} className="p-8 rounded-2xl bg-white/5 border border-white/10 flex flex-col lg:flex-row gap-8 items-center">
                 <div className="w-full lg:w-1/2 h-64 sm:h-72 rounded-xl overflow-hidden border border-white/10 relative group bg-[#0f172a]">
-                  <img 
+                  <Image 
                     src={proj.image} 
                     alt={proj.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent opacity-60" />
                 </div>
@@ -407,7 +414,7 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-y border-white/10">
         <div className="max-w-4xl mx-auto text-center px-6 space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-sm">
-            <UserCheck size={16} /> I'm Open to Opportunities
+            <UserCheck size={16} /> I&apos;m Open to Opportunities
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold">Looking for a Dedicated Full-Stack Developer?</h2>
           <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto">
@@ -433,7 +440,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
             <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Get In Touch</h2>
-            <h3 className="text-3xl font-bold mb-6">Let's Build Something Together</h3>
+            <h3 className="text-3xl font-bold mb-6">Let&apos;s Build Something Together</h3>
             <p className="text-gray-400 text-sm mb-8">
               Feel free to reach out for job openings, freelance projects, or technical collaborations.
             </p>

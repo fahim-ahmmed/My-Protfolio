@@ -22,27 +22,33 @@ export async function generateStaticParams() {
 
 }
 
-export async function generateMetadata({params}){
+export async function generateMetadata({ params }) {
 
-    const project=getProject(params.slug)
+    const { slug } = await params;
+    const project = getProject(slug);
 
-    return{
-
-        title:project.title,
-
-        description:project.description
-
+    if (!project) {
+        return {
+            title: "Project Not Found",
+            description: "The requested project could not be found.",
+        };
     }
+
+    return {
+        title: project.title,
+        description: project.description,
+    };
 
 }
 
-export default function ProjectPage({params}){
+export default async function ProjectPage({ params }) {
 
-    const project=getProject(params.slug)
+    const { slug } = await params;
+    const project = getProject(slug);
 
-    if(!project){
+    if (!project) {
 
-        notFound()
+        notFound();
 
     }
 

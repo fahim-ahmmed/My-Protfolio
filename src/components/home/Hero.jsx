@@ -25,7 +25,7 @@ export default function Hero() {
             transition={{ duration: .7 }}
           >
             <p className="text-primary font-semibold mb-3">
-              Hello, I'm
+              Hello, I&apos;m
             </p>
 
             <h1 className="text-5xl lg:text-7xl font-bold leading-tight">

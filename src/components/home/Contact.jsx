@@ -22,7 +22,7 @@ className="py-24"
 
 subtitle="Contact"
 
-title="Let's Work Together"
+title="Let&apos;s Work Together"
 
 />
 
