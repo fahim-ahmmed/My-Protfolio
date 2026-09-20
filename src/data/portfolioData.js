@@ -5,6 +5,9 @@ export const personalInfo = {
   aboutShort: "I build modern, responsive and scalable web applications with clean code, secure REST APIs, and thoughtful user experiences.",
   availability: "Available for Job Opportunities",
   avatar: "/fahimpic.png",
+  responseTime: "< 1 Hour",
+  completedProjects: "15+",
+  clientSatisfaction: "100%",
   education: [
     { 
       degree: "B.Sc in CSE", 
@@ -25,7 +28,9 @@ export const personalInfo = {
     email: "ahmmedshihab205@gmail.com",
     github: "https://github.com/fahim-ahmmed",
     linkedin: "https://linkedin.com/in/fahim-ahmmed",
-    whatsapp: "+8801305470835"
+    whatsapp: "+8801572930788",
+    phone: "+8801305470835",
+    facebook: "https://www.facebook.com/ahmmedfahim205"
   }
 };
 
@@ -33,7 +38,7 @@ export const techStack = [
   "JavaScript", "React", "Next.js", "Node.js", "Express.js", "MongoDB", "Firebase", "Tailwind CSS", "Git", "REST API"
 ];
 
-// Technical Skills with Exact Topic/Brand Icons
+// Technical Skills with Brand Logo Icons
 export const skillsWithIcons = {
   frontend: [
     { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
@@ -64,37 +69,112 @@ export const skillsWithIcons = {
   ]
 };
 
-// Services with Topic-exact High Quality Unsplash Images
+// Services
 export const services = [
   {
     id: "01",
     title: "Full-Stack Web Application",
     description: "Complete end-to-end web apps built with modern Frontend, Node/Express Backend, MongoDB, and secure authentication.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80" // Modern IDE & Clean Code
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80"
   },
   {
     id: "02",
     title: "Business Website",
     description: "Fast, responsive, and SEO-friendly modern websites designed to establish a strong online brand presence.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" // Web Design Analytics & UI
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80"
   },
   {
     id: "03",
     title: "E-commerce Platform",
     description: "Full-fledged e-commerce solutions with product catalogs, shopping carts, checkout, and order management.",
-    image: "/rootz.png " // Online Shopping Checkout & Store
+    image: "https://images.unsplash.com/photo-1556742049-0a670f4a4591?auto=format&fit=crop&w=1000&q=80"
   },
   {
     id: "04",
     title: "REST API & Backend",
     description: "Scalable, secure, and well-documented REST APIs integrated with databases and third-party services.",
-    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=1000&q=80" // Server & API Data Flow Architecture
+    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=1000&q=80"
   },
   {
     id: "05",
     title: "Bug Fixing & Optimization",
     description: "Troubleshooting React/Next.js UI bugs, API errors, and optimizing web application performance.",
-    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=1000&q=80" // Code Debugging & Terminal Window
+    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=1000&q=80"
+  }
+];
+
+// Service Work Process (Fiverr Style Steps)
+export const workProcess = [
+  {
+    step: "01",
+    title: "Requirements & Discussion",
+    desc: "Understanding project scope, goals, target audience, and functional specifications."
+  },
+  {
+    step: "02",
+    title: "Architecture & UI Design",
+    desc: "Planning application database schema, state structure, and responsive UI layouts."
+  },
+  {
+    step: "03",
+    title: "Development & Integration",
+    desc: "Writing clean, scalable code for Frontend & Backend APIs with secure integrations."
+  },
+  {
+    step: "04",
+    title: "Testing & Deployment",
+    desc: "Thorough testing across devices and seamless deployment on Vercel or cloud platforms."
+  }
+];
+
+// Client Reviews & Ratings (Fiverr Style)
+export const testimonials = [
+  {
+    id: 1,
+    name: "Alex Johnson",
+    role: "Product Owner",
+    country: "🇺🇸 United States",
+    rating: 5,
+    comment: "Fahim delivered our Next.js dashboard project ahead of schedule. Clean code, great communication, and super fast response time!",
+    serviceUsed: "Full-Stack Web Application"
+  },
+  {
+    id: 2,
+    name: "David Miller",
+    role: "Startup Founder",
+    country: "🇬🇧 United Kingdom",
+    rating: 5,
+    comment: "Excellent developer! Fixed complex React state management bugs effortlessly and made our site extremely responsive.",
+    serviceUsed: "Bug Fixing & Optimization"
+  },
+  {
+    id: 3,
+    name: "Rahim Ahmed",
+    role: "E-commerce Business Owner",
+    country: "🇧🇩 Bangladesh",
+    rating: 5,
+    comment: "Top notch MERN stack developer. Built a fast, secure shopping application with seamless user authentication.",
+    serviceUsed: "E-commerce Platform"
+  }
+];
+
+// FAQ Section
+export const faqs = [
+  {
+    question: "Do you provide post-project support and maintenance?",
+    answer: "Yes, I offer free bug fixing and technical support for a dedicated period after project completion to ensure smooth operation."
+  },
+  {
+    question: "Will my application or website be mobile responsive?",
+    answer: "100%! All websites and web applications are designed with a mobile-first approach, ensuring flawless layout across phones, tablets, and desktops."
+  },
+  {
+    question: "Do you provide complete source code after completion?",
+    answer: "Yes, you will receive full access to the GitHub repository and source code files upon project delivery."
+  },
+  {
+    question: "How do we communicate during project development?",
+    answer: "We can communicate via WhatsApp, Email, or live calls to share regular progress updates and review demos."
   }
 ];
 

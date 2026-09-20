@@ -1,59 +1,56 @@
 import "./globals.css";
-
 import Providers from "@/components/providers/ThemeProvider";
 
 export const metadata = {
   title: {
-    default: "Fahim Ahmed | Frontend Developer",
-    template: "%s | Fahim Ahmed",
+    default: "Md Fahim Ahammed Shihab | Full-Stack Web Developer",
+    template: "%s | Md Fahim Ahammed Shihab",
   },
 
   description:
-    "Frontend Developer specializing in Next.js, React.js and Tailwind CSS.",
+    "Full-Stack Web Developer specializing in Next.js, React.js, Node.js, Express, MongoDB, and Tailwind CSS.",
 
   keywords: [
+    "Full-Stack Developer",
+    "MERN Stack Developer",
     "Frontend Developer",
-    "React",
-    "Next.js",
-    "Portfolio",
+    "React Developer",
+    "Next.js Developer",
+    "Md Fahim Ahammed Shihab",
+    "Fahim Developer Portfolio",
     "JavaScript",
     "Tailwind CSS",
   ],
 
   authors: [
     {
-      name: "Fahim Ahmed",
+      name: "Md Fahim Ahammed Shihab",
+      url: "https://github.com/fahim-ahmmed",
     },
   ],
 
-  creator: "Fahim Ahmed",
+  creator: "Md Fahim Ahammed Shihab",
+
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 
   openGraph: {
-    title: "Fahim Ahmed",
-
+    title: "Md Fahim Ahammed Shihab | Full-Stack Web Developer",
     description:
-      "Modern Frontend Developer Portfolio",
-
+      "Modern Full-Stack Web Developer Portfolio specializing in MERN & Next.js ecosystem.",
     type: "website",
+    locale: "en_US",
   },
 };
 
-export default function RootLayout({
-  children,
-}) {
+export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <body>
-
-        <Providers>
-
-          {children}
-
-        </Providers>
-
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

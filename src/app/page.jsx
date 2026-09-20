@@ -1,13 +1,16 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Mail, ExternalLink, Download, GraduationCap, Calendar, 
-  CheckCircle2, ArrowRight, Menu, X, Sparkles, UserCheck
+  CheckCircle2, ArrowRight, Menu, X, Sparkles, UserCheck,
+  Star, Clock, ShieldCheck, MessageSquare, HelpCircle, ChevronDown
 } from 'lucide-react';
-import { personalInfo, techStack, skillsWithIcons, services, projects, whyHireMe } from '@/data/portfolioData';
+import { 
+  personalInfo, techStack, skillsWithIcons, services, projects, 
+  whyHireMe, workProcess, testimonials, faqs 
+} from '@/data/portfolioData';
 
 // Custom SVG Icons
 const GithubIcon = ({ size = 18, className = "" }) => (
@@ -40,6 +43,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
+  const [openFaq, setOpenFaq] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -61,15 +65,15 @@ export default function Home() {
           </a>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-            {['About', 'Skills', 'Services', 'Projects', 'Experience', 'Contact'].map((item) => (
+            {['About', 'Skills', 'Services', 'Process', 'Projects', 'Reviews', 'Contact'].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-blue-400 transition-colors">
                 {item}
               </a>
             ))}
           </div>
 
-          <a href="#contact" className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 text-sm font-semibold transition-all">
-            Let&apos;s GO <ArrowRight size={16} />
+          <a href="https://wa.me/8801572930788" target="_blank" rel="noreferrer" className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-sm font-semibold transition-all text-white">
+            <MessageSquare size={16} /> Quick Chat
           </a>
 
           <button onClick={() => setMobileMenu(!mobileMenu)} className="md:hidden text-gray-300">
@@ -80,13 +84,13 @@ export default function Home() {
         {/* Mobile Dropdown */}
         {mobileMenu && (
           <div className="md:hidden bg-[#070B14]/95 backdrop-blur-lg border-b border-white/10 px-6 py-6 flex flex-col gap-4">
-            {['About', 'Skills', 'Services', 'Projects', 'Experience', 'Contact'].map((item) => (
+            {['About', 'Skills', 'Services', 'Process', 'Projects', 'Reviews', 'Contact'].map((item) => (
               <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMobileMenu(false)} className="text-gray-300 hover:text-blue-400">
                 {item}
               </a>
             ))}
-            <a href="#contact" onClick={() => setMobileMenu(false)} className="mt-2 text-center py-2.5 rounded-full bg-blue-600 text-white font-medium">
-              Let&apos;s Go
+            <a href="https://wa.me/8801572930788" target="_blank" rel="noreferrer" onClick={() => setMobileMenu(false)} className="mt-2 text-center py-2.5 rounded-full bg-emerald-600 text-white font-medium">
+              Quick Chat
             </a>
           </div>
         )}
@@ -98,8 +102,13 @@ export default function Home() {
         <div className="absolute -bottom-20 right-0 w-96 h-96 bg-purple-600/15 rounded-full blur-[120px] pointer-events-none" />
 
         <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="flex-1 space-y-6 z-10">
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm">
-            <Sparkles size={16} /> Hello, I&apos;m Fahim 👋
+          
+          {/* Trust Rating Badge */}
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-medium">
+            <div className="flex text-amber-400">
+              {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+            </div>
+            <span>5.0 Rating | Available for Hire</span>
           </motion.div>
 
           <motion.h1 variants={fadeInUp} className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
@@ -126,9 +135,20 @@ export default function Home() {
             </a>
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="pt-4 flex items-center gap-3 text-sm text-emerald-400 font-medium">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-            {personalInfo.availability}
+          {/* Fiverr Style Response Time & Availability Stats */}
+          <motion.div variants={fadeInUp} className="pt-4 flex flex-wrap items-center gap-6 text-xs text-gray-400 border-t border-white/10">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-emerald-400 font-medium">{personalInfo.availability}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Clock size={14} className="text-blue-400" />
+              <span>Response: <strong className="text-white">{personalInfo.responseTime}</strong></span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck size={14} className="text-purple-400" />
+              <span>Satisfaction: <strong className="text-white">{personalInfo.clientSatisfaction}</strong></span>
+            </div>
           </motion.div>
         </motion.div>
 
@@ -159,17 +179,40 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 03 — QUICK TRUST MARQUEE */}
-      <div className="py-8 bg-white/[0.02] border-y border-white/5 overflow-hidden">
-        <div className="flex w-max animate-marquee gap-12 text-gray-400 text-sm font-semibold tracking-wider uppercase">
-          {[...techStack, ...techStack].map((tech, idx) => (
-            <span key={idx} className="flex items-center gap-3">
-              <span className="text-blue-500">✦</span> {tech}
-            </span>
-          ))}
-        </div>
-      </div>
+  {/* 03 — TRUST METRICS & HIGHLIGHTS BANNER */}
+<section className="py-8 bg-white/[0.02] border-y border-white/10 backdrop-blur-md">
+  <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    
+    <div className="space-y-1">
+      <h4 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+        15+
+      </h4>
+      <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Completed Projects</p>
+    </div>
 
+    <div className="space-y-1">
+      <h4 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+        100%
+      </h4>
+      <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Client Satisfaction</p>
+    </div>
+
+    <div className="space-y-1">
+      <h4 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+        &lt; 1hr
+      </h4>
+      <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Response Time</p>
+    </div>
+
+    <div className="space-y-1">
+      <h4 className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+        24/7
+      </h4>
+      <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Technical Support</p>
+    </div>
+
+  </div>
+</section>
       {/* 04 — ABOUT ME & EDUCATION */}
       <section id="about" className="py-24 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -229,7 +272,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 05 — TECHNICAL SKILLS WITH BRAND LOGO ICONS */}
+      {/* 05 — TECHNICAL SKILLS */}
       <section id="skills" className="py-20 bg-white/[0.01]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -255,7 +298,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — SERVICES WITH TOPIC-EXACT HIGH QUALITY IMAGES */}
+      {/* 06 — SERVICES */}
       <section id="services" className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Services</h2>
@@ -264,34 +307,66 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((srv) => (
-            <div key={srv.id} className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all group flex flex-col">
-              <div className="h-44 w-full relative overflow-hidden bg-[#0d1322]">
-                <Image 
-                  src={srv.image} 
-                  alt={srv.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent" />
-                <span className="absolute top-4 left-4 text-2xl font-black text-white px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10">
-                  {srv.id}
-                </span>
+            <div key={srv.id} className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:border-blue-500/40 hover:-translate-y-1.5 transition-all group flex flex-col justify-between">
+              <div>
+                <div className="h-44 w-full relative overflow-hidden bg-[#0d1322]">
+                  <Image 
+                    src={srv.image} 
+                    alt={srv.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent" />
+                  <span className="absolute top-4 left-4 text-2xl font-black text-white px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md border border-white/10">
+                    {srv.id}
+                  </span>
+                </div>
+
+                <div className="p-6">
+                  <h4 className="text-xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">{srv.title}</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6">{srv.description}</p>
+                </div>
               </div>
 
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h4 className="text-xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">{srv.title}</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">{srv.description}</p>
-                </div>
+              {/* Fiverr Style Order Button */}
+              <div className="p-6 pt-0">
+                <a 
+                  href="https://wa.me/8801572930788" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="w-full py-2.5 rounded-xl bg-white/10 hover:bg-emerald-600 hover:text-white text-emerald-400 text-xs font-semibold transition-all flex items-center justify-center gap-2 border border-white/10"
+                >
+                  <MessageSquare size={14} /> Discuss This Service
+                </a>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 07 — FEATURED PROJECTS */}
-      <section id="projects" className="py-24 bg-white/[0.01]">
+      {/* 07 — SERVICE WORK PROCESS (Fiverr Style Steps) */}
+      <section id="process" className="py-20 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Workflow</h2>
+            <h3 className="text-3xl font-bold">How I Deliver Successful Projects</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {workProcess.map((proc) => (
+              <div key={proc.step} className="p-6 rounded-2xl bg-white/5 border border-white/10 relative group hover:border-blue-500/40 transition-all">
+                <span className="text-4xl font-black text-blue-500/20 group-hover:text-blue-400 transition-colors block mb-2">{proc.step}</span>
+                <h4 className="text-lg font-bold mb-2 text-white">{proc.title}</h4>
+                <p className="text-xs text-gray-400 leading-relaxed">{proc.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 08 — FEATURED PROJECTS */}
+      <section id="projects" className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Portfolio</h2>
@@ -341,7 +416,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 08 — CASE STUDY MODAL */}
+      {/* 09 — CLIENT REVIEWS & RATINGS (Fiverr Style) */}
+      <section id="reviews" className="py-20 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Testimonials</h2>
+            <h3 className="text-3xl font-bold">What Clients Say About My Work</h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((review) => (
+              <div key={review.id} className="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between space-y-4">
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <div className="flex text-amber-400">
+                      {[...Array(review.rating)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                    </div>
+                    <span className="text-xs text-gray-400">{review.country}</span>
+                  </div>
+                  <p className="text-gray-300 text-sm leading-relaxed italic">&quot;{review.comment}&quot;</p>
+                </div>
+
+                <div className="border-t border-white/10 pt-4">
+                  <h5 className="text-sm font-bold text-white">{review.name}</h5>
+                  <span className="text-xs text-blue-400 block">{review.role}</span>
+                  <span className="text-[10px] text-gray-500 block mt-1">Service: {review.serviceUsed}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 10 — FAQ SECTION (Accordion) */}
+      <section className="py-24 max-w-4xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-2">Got Questions?</h2>
+          <h3 className="text-3xl font-bold flex items-center justify-center gap-2">
+            <HelpCircle size={28} className="text-blue-400" /> Frequently Asked Questions
+          </h3>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+              <button 
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                className="w-full p-5 text-left font-semibold text-white flex justify-between items-center text-sm sm:text-base hover:text-blue-400 transition-colors"
+              >
+                <span>{faq.question}</span>
+                <ChevronDown size={18} className={`transition-transform ${openFaq === index ? 'rotate-180 text-blue-400' : 'text-gray-400'}`} />
+              </button>
+              {openFaq === index && (
+                <div className="px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 11 — CASE STUDY MODAL */}
       {activeModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6">
           <div className="bg-[#0f172a] border border-white/10 max-w-2xl w-full p-8 rounded-2xl relative max-h-[90vh] overflow-y-auto">
@@ -371,8 +507,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* 09 & 10 — EXPERIENCE & WHY HIRE ME */}
-      <section className="py-24 max-w-7xl mx-auto px-6">
+      {/* 12 & 13 — EXPERIENCE & WHY HIRE ME */}
+      <section className="py-24 max-w-7xl mx-auto px-6 border-t border-white/5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Journey */}
           <div id="experience">
@@ -410,7 +546,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 11 & 12 — JOB / INTERNSHIP CTA */}
+      {/* 14 — CTA */}
       <section className="py-20 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border-y border-white/10">
         <div className="max-w-4xl mx-auto text-center px-6 space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-sm">
@@ -435,7 +571,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 13 — CONTACT */}
+      {/* 15 — CONTACT */}
       <section id="contact" className="py-24 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
@@ -446,13 +582,11 @@ export default function Home() {
             </p>
             <div className="space-y-4 text-sm text-gray-300">
               
-              {/* Clickable Email */}
               <a href="mailto:ahmmedshihab205@gmail.com" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
                 <Mail className="text-blue-400 shrink-0" size={18} /> 
                 <span>ahmmedshihab205@gmail.com</span>
               </a>
 
-              {/* Clickable Phone Number */}
               <a href="tel:+8801305470835" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
                 <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 shrink-0">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -460,7 +594,6 @@ export default function Home() {
                 <span>+880 1305470835</span>
               </a>
 
-              {/* Clickable WhatsApp */}
               <a href="https://wa.me/8801572930788" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-emerald-400 transition-colors">
                 <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-400 shrink-0">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
@@ -468,7 +601,6 @@ export default function Home() {
                 <span>WhatsApp Chat</span>
               </a>
 
-              {/* Clickable Facebook */}
               <a href="https://www.facebook.com/ahmmedfahim205" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
                 <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400 shrink-0">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -476,13 +608,11 @@ export default function Home() {
                 <span>Facebook Profile</span>
               </a>
 
-              {/* Clickable LinkedIn */}
               <a href="https://linkedin.com/in/fahim-ahmmed" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
                 <LinkedinIcon className="text-blue-400 shrink-0" size={18} /> 
                 <span>LinkedIn Profile</span>
               </a>
 
-              {/* Clickable GitHub */}
               <a href="https://github.com/fahim-ahmmed" target="_blank" rel="noreferrer" className="flex items-center gap-3 hover:text-blue-400 transition-colors">
                 <GithubIcon className="text-blue-400 shrink-0" size={18} /> 
                 <span>GitHub Repository</span>
@@ -511,7 +641,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 14 — FOOTER */}
+      {/* 16 — FOOTER */}
       <footer className="py-8 border-t border-white/10 text-center text-xs text-gray-500">
         <p>© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
       </footer>
